@@ -1,45 +1,39 @@
-#pragma once
-
-#define _XOPEN_SOURCE   600
-#define _POSIX_C_SOURCE 200112L
-
+#ifndef HEADER
+#define HEADER
 #include <ncurses.h>
-#include <string.h>
-#include <unistd.h>
-#include <time.h>
 #include <stdlib.h>
-#include <locale.h>
-#include <stddef.h>
+#include <time.h>
+#include <unistd.h>
+#define SHORT_DROPLET 
+#ifdef SHORT_DROPLET
+struct droplet{
+    unsigned short length, col;
+    short row;   //signed so droplets can start above screen
+    unsigned short frames_per_row;
+};
+#else //SHORT_DROPLET
+struct droplet{
+    unsigned int length, col;
+    int row;    //signed so droplets can start above screen
+    unsigned int frames_per_row;
+};
+#endif //SHORT_DROPLET
+int init_droplets();
+void cleanup();
+int draw_rain();
+int draw_droplet(struct droplet *drop);
+int gen_droplet_props(struct droplet *drop);
+int droplets_realloc();
 
-#define MIN_SPEED 0
-#define MAX_SPEED 50
-#define DEFAULT_SPEED 25
-#define DEFAULT_COLOR 2
+unsigned int refresh_rate;
+char multicolor_trail;
+char velocity;
+char primary_color;
+char secondary_color;
+static const char max_char = 126, min_char = 33;
+static unsigned int max_row, max_col;
+static unsigned int num_of_droplets;
+static struct droplet *droplets;
 
-struct sSettings{
-	int speed;
-	int color;
-}	Settings;
+#endif 
 
-typedef
-struct sCharacter{
-	char symbol;
-	int color;
-}	Character;
-
-struct sScreen{
-	int width;
-	int height;
-	Character ***dots;
-}	Screen;
-
-int mx_strcmp(const char *s1, const char *s2);
-void mx_printerr(char *str);
-int mx_strlen(char *s);
-
-void mx_draw_run(void (*action)(void));
-void mx_draw_intro();
-void mx_draw_rain();
-void mx_init();
-void mx_init_colors();
-void mx_on_key_press();
