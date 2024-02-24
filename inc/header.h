@@ -1,39 +1,31 @@
-#ifndef HEADER
-#define HEADER
-#include <ncurses.h>
-#include <stdlib.h>
-#include <time.h>
+#pragma once
+
+#define _DEFAULT_SOURCE
+
 #include <unistd.h>
-#define SHORT_DROPLET 
-#ifdef SHORT_DROPLET
-struct droplet{
-    unsigned short length, col;
-    short row;   //signed so droplets can start above screen
-    unsigned short frames_per_row;
-};
-#else //SHORT_DROPLET
-struct droplet{
-    unsigned int length, col;
-    int row;    //signed so droplets can start above screen
-    unsigned int frames_per_row;
-};
-#endif //SHORT_DROPLET
-int init_droplets();
-void cleanup();
-int draw_rain();
-int draw_droplet(struct droplet *drop);
-int gen_droplet_props(struct droplet *drop);
-int droplets_realloc();
+#include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <ncurses.h>
+#include <locale.h>
+#include <stdbool.h>
 
-unsigned int refresh_rate;
-char multicolor_trail;
-char velocity;
-char primary_color;
-char secondary_color;
-static const char max_char = 126, min_char = 33;
-static unsigned int max_row, max_col;
-static unsigned int num_of_droplets;
-static struct droplet *droplets;
+void mx_printint(int n);
+void mx_printchar(char c);
+int mx_strlen(const char *c);
+void mx_printerr(const char *s);
+void mx_printstr(const char *s);
+int randomizer(int a, int b, int c);
+bool wake_up(bool screensaver);
+void set_color(int color);
+wchar_t get_japanese();
+bool probability(int percent);
+void move_down(wchar_t *arr, int rows);
+void fill_cols(wchar_t *arr);
+void print_col(wchar_t *col, int rows, int x, int iterations);
+void print_rain(bool screensaver);
+void usage(int argc, char *argv[]);
+int mx_strcmp(const char *s1, const char *s2);
 
-#endif 
+
 
