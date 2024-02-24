@@ -1,4 +1,4 @@
-#include "header.h"
+#include "../inc/header.h"
 
 void fill_cols(wchar_t *arr) {
     if (arr[1] == ' ') {

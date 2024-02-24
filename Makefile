@@ -1,29 +1,17 @@
-CFLAGS = -std=c11 -Wall -Wextra -Wpedantic -Werror
-LANG = clang
+CC = clang
+CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic -Iinc -lncurses
+OUT = matrix_rain
 
-PROJ_NAME = DECRYPT_MATH_EXPR
-EXEC_NAME = matrix_rain
+all: $(OUT)
 
-.PHONY: all clean uninstall reinstall
-
-all: $(PROJ_NAME)
-
-$(PROJ_NAME):
-	mkdir -p ./obj
-	mkdir -p ./temp
-	cp ./inc/* ./temp/
-	cp ./src/* ./temp/
-	$(LANG) $(CFLAGS) ./temp/*.c -include ./temp/*.h -c
-	rm -rf ./temp
-	mv *.o ./obj
-	$(LANG) $(CFLAGS) ./obj/* -o $(EXEC_NAME)
-	
+$(OUT): src/*.c
+	$(CC) $(CFLAGS) -o $@ $^
 
 uninstall:
-	rm -rf ./obj $(EXEC_NAME)
+	rm -f $(OUT)
 
 clean:
-	rm -rf ./obj
 
-reinstall: uninstall $(PROJ_NAME)
+reinstall: uninstall all
+
 

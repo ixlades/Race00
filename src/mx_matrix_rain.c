@@ -1,4 +1,4 @@
-#include "header.h"
+#include "../inc/header.h"
 
 int main(int argc, char *argv[]) {
     usage(argc, argv);

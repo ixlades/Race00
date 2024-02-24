@@ -1,3 +1,5 @@
+#include "../inc/header.h"
+
 int mx_strlen(const char *s) {
     int length = 0;
 

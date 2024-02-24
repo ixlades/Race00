@@ -1,4 +1,4 @@
-#include "header.h"
+#include "../inc/header.h"
 
 void usage(int argc, char *argv[]) {
     if (argc > 2) {

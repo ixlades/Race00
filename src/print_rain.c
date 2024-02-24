@@ -1,4 +1,4 @@
-#include "header.h"
+#include "../inc/header.h"
 
 void print_rain(bool screensaver) {
     int x = 0;

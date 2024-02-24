@@ -1,4 +1,4 @@
-#include "header.h"
+#include "../inc/header.h"
 
 void print_col(wchar_t *col, int rows, int x, int iterations) {
     for (int i = rows - 1; i >= 0; i--) {

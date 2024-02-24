@@ -1,4 +1,4 @@
-#include "header.h"
+#include "../inc/header.h"
 
 bool wake_up(bool screensaver) {
     char *mas[4];
